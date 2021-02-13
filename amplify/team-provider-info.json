@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-dotchat-dev-02858-authRole",
+      "UnauthRoleArn": "arn:aws:iam::132730230813:role/amplify-dotchat-dev-02858-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::132730230813:role/amplify-dotchat-dev-02858-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-dotchat-dev-02858-deployment",
+      "UnauthRoleName": "amplify-dotchat-dev-02858-unauthRole",
+      "StackName": "amplify-dotchat-dev-02858",
+      "StackId": "arn:aws:cloudformation:us-east-2:132730230813:stack/amplify-dotchat-dev-02858/ba37a5f0-6d81-11eb-ab81-02280682171a",
+      "AmplifyAppId": "d15cn5jdvc973"
+    },
+    "categories": {
+      "auth": {
+        "dotchat5a292732": {}
+      }
+    }
+  }
+}
