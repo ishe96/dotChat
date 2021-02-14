@@ -1,1 +1,10 @@
-{}
+{
+  "auth": {
+    "dotchat11702c65": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

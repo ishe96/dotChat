@@ -10,6 +10,11 @@
       "StackName": "amplify-dotchat-dev-42830",
       "StackId": "arn:aws:cloudformation:us-east-2:132730230813:stack/amplify-dotchat-dev-42830/580e0810-6e6c-11eb-830e-0a9f3c449e8c",
       "AmplifyAppId": "d3oblzakxsj7sd"
+    },
+    "categories": {
+      "auth": {
+        "dotchat11702c65": {}
+      }
     }
   }
 }
