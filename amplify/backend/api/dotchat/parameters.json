@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "dotchat",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authdotchat4ef2b616",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

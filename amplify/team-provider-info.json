@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-dotchat-dev-42830-authRole",
-      "UnauthRoleArn": "arn:aws:iam::132730230813:role/amplify-dotchat-dev-42830-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::132730230813:role/amplify-dotchat-dev-42830-authRole",
+      "AuthRoleName": "amplify-dotchat-dev-20056-authRole",
+      "UnauthRoleArn": "arn:aws:iam::132730230813:role/amplify-dotchat-dev-20056-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::132730230813:role/amplify-dotchat-dev-20056-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-dotchat-dev-42830-deployment",
-      "UnauthRoleName": "amplify-dotchat-dev-42830-unauthRole",
-      "StackName": "amplify-dotchat-dev-42830",
-      "StackId": "arn:aws:cloudformation:us-east-2:132730230813:stack/amplify-dotchat-dev-42830/580e0810-6e6c-11eb-830e-0a9f3c449e8c",
-      "AmplifyAppId": "d3oblzakxsj7sd"
+      "DeploymentBucketName": "amplify-dotchat-dev-20056-deployment",
+      "UnauthRoleName": "amplify-dotchat-dev-20056-unauthRole",
+      "StackName": "amplify-dotchat-dev-20056",
+      "StackId": "arn:aws:cloudformation:us-east-2:132730230813:stack/amplify-dotchat-dev-20056/66462ad0-717c-11eb-8a40-068960cbde34",
+      "AmplifyAppId": "d2lkgn3aljavvc"
     },
     "categories": {
       "auth": {
-        "dotchat11702c65": {}
+        "dotchat4ef2b616": {}
       }
     }
   }
