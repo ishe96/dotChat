@@ -1,5 +1,5 @@
 import React from 'react';
-import { Message } from '../../../types';
+import { Message } from '../../types';
 import { View, Text, Image } from 'react-native';
 import moment from 'moment';
 import styles from './styles';

@@ -10,6 +10,12 @@ import { User } from '../../types';
 import styles from './style';
 import { useNavigation } from '@react-navigation/native';
 
+import {API, Auth, graphqlOperation} from 'aws-amplify'
+import { 
+    createChatRoom,
+    createChatRoomUser
+} from '../../src/graphql/mutations';
+
 export type ContactListItemProps = {
     user: User;
 }
@@ -19,8 +25,60 @@ const ContactListItem = (props: ContactListItemProps) => {
 
     const navigation = useNavigation();
     
-    const onClick = () => {
+    const onClick = async() => {
         //Navigate to chat room with the user
+        try {
+            // create new chatRoom
+            const newChatRoomData = await API.graphql(
+                graphqlOperation(
+                    createChatRoom, {
+                        input: {}
+                    }
+                )
+            )
+
+            if(!newChatRoomData.data){
+                console.log("Failed to create Chat Room")
+                return;
+            }
+
+            const newChatRoom = newChatRoomData.data.createChatRoom;
+
+            console.log(newChatRoom);
+
+            // add user to chatRoom
+            await API.graphql(
+                graphqlOperation(
+                    createChatRoomUser, {
+                        input: {
+                          userID: user.id,
+                          chatRoomID: newChatRoom.id,
+                        }
+                    }
+                )
+            )
+
+            // add authenticate users to the chatRoom
+            const userInfo = await Auth.currentAuthenticatedUser();
+            await API.graphql(
+                graphqlOperation(
+                    createChatRoomUser, {
+                        input: {
+                          userID: userInfo.attributes.sub,
+                          chatRoomID: newChatRoom.id,  
+                        }
+                    }
+                )
+            )
+
+            navigation.navigate('ChatRoom', {
+                id: newChatRoom.id,
+                name: user.name,
+            })
+
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return(
