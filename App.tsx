@@ -17,7 +17,7 @@ import {createUser} from './src/graphql/mutations';
 Amplify.configure(config)
 
 const randomImages = [
-  'https://hieumobile.com/wp-content/uploads/avatar-among-us-2.jpg',
+  'https://hieumobile.com/wp-content/uploads/avatar-among-us-3.jpg',
   'https://hieumobile.com/wp-content/uploads/avatar-among-us-4.jpg',
   'https://hieumobile.com/wp-content/uploads/avatar-among-us-6.jpg',
   'https://hieumobile.com/wp-content/uploads/avatar-among-us-9.jpg'
@@ -49,7 +49,7 @@ function App() {
         )
 
         if(userData.data.getUser){
-          console.log("The User is already registered in the dataBase");
+         // console.log("The User is already registered in the dataBase");
           return;
         }
 
@@ -57,9 +57,9 @@ function App() {
           id: userInfo.attributes.sub,
           name: userInfo.username,
           imageUri: getRandomImage(),
-          status: 'Hey there, I am using Chat',
+          status: 'Hey there, I am using .Chat',
         }
-        
+
         await API.graphql(
           graphqlOperation(
             createUser,
