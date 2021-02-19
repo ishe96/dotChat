@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 
 import { TextInput } from 'react-native-gesture-handler';
 import { useState } from 'react';
 
-import {Message} from '../../types';
+import {
+    Auth,
+    graphqlOperation,
+    API
+} from 'aws-amplify';
+
+import {createMessage} from '../../src/graphql/mutations';
 
 import { 
     FontAwesome5, 
@@ -16,18 +22,43 @@ import {
 } from '@expo/vector-icons';
 
 
-const InputBox = () => {
+const InputBox = (props) => {
+
+    const {chatRoomID} = props;
 
     const [message, setMessage] = useState('');
+    const [myUserId, setMyUserID] = useState(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const userInfo = await Auth.currentAuthenticatedUser();
+            setMyUserID(userInfo.attributes.sub);
+        } 
+        fetchUser();
+    }, [])
 
     const onMicroPhonePress = () => {
         console.warn('Microphone')
     }
 
-    const onSendPress = () => {
-        console.warn('.dotChat Sent')
-
+    const onSendPress = async () => {
         //Sending message via Backend
+
+        try {
+            await API.graphql(
+                graphqlOperation(
+                    createMessage, {
+                        input: {
+                            content: message,
+                            userID: myUserId,
+                            chatRoomID
+                        }
+                    }
+                )
+            )
+        } catch (e) {
+            console.log(e);
+        }
 
         setMessage('');
     }
