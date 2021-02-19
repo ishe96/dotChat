@@ -6,14 +6,15 @@ import styles from './styles';
 
 export type ChatMessagePros={
     message: Message;
+    myId: String,
 }
 
 const ChatMessage = (props: ChatMessagePros) => {
-    const { message } = props;
+    const { message, myId } = props;
 
     const isMyMessage= () => {
         //returning and confirming my message(example 'u1') from ChatRooms.ts
-        return message.user.id === 'u1';
+        return message.user.id === myId;
     }
 
     return(
