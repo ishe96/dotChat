@@ -22,8 +22,8 @@ export default function ChatScreen() {
             listUsers
           )
         )
-        console.log(userData);
         setUsers(userData.data.listUsers.items);
+        
       }catch (e){
         console.log(e);
       }

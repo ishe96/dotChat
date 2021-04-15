@@ -18,6 +18,7 @@ import {
 } from 'aws-amplify';
 
 import { messagesByChatRoom } from '../src/graphql/queries';
+import {onCreateMessage} from '../src/graphql/subscriptions';
 
 const ChatRoomScreen =()  => {
 
@@ -25,8 +26,6 @@ const ChatRoomScreen =()  => {
     const [myId, setMyId] = useState(null);
     
     const route = useRoute();
-
-    console.log(route.params.id);
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -39,7 +38,6 @@ const ChatRoomScreen =()  => {
                 )
             )
             setMessages(messagesData.data.messagesByChatRoom.items);
-            console.log(messagesData);
         } 
         fetchMessages();
     }, [])
@@ -51,6 +49,33 @@ const ChatRoomScreen =()  => {
         } 
         getMyId();
     }, [])
+
+    const addMessageToState = async(message) => {
+        setMessages([message, ...messages]);
+    }
+
+    useEffect(() => {
+        const subscription = API.graphql(
+            graphqlOperation(onCreateMessage)
+        ).subscribe({
+            next: (data) => {
+                const newMessage = data.value.data.onCreateMessage;
+                
+                if(newMessage.chatRoomID !== route.params.id){
+                    return;
+                }
+
+                addMessageToState(newMessage);
+
+                /*console.log(messages.length);
+                setMessages([newMessage, ...messages]);*/
+            }
+        });
+
+        return () => subscription.unsubscribe();
+    }, [])
+
+    console.log(`messages in state: ${messages.length}`)
 
     return(
         <ImageBackground style={{width:'100%', height:'100%'}} source={BG}>

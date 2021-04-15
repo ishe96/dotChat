@@ -6,7 +6,7 @@ type User @model {
   chatRoomUser: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
 }
 
-type ChatRoomUser 
+type ChatRoomUser #Relationship between User & ChatRoom : Many-Many
 @model 
 @key(name: "byUser", fields: ["userID", "chatRoomID"]) 
 @key(name: "byChatRoom", fields: ["chatRoomID", "userID"]){
@@ -23,6 +23,8 @@ type ChatRoom @model{
   # List of message
   chatRoomUsers: [ChatRoomUser] @connection(keyName: "byChatRoom", fields: ["id"])
   messages: [Message] @connection(keyName: "byChatRoom", fields: ["id"])
+  lastMessageID: ID!
+  lastMessage: Message @connection(fields: ["lastMessageID"])
 }
 
 type Message 
