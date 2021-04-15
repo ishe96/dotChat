@@ -27,7 +27,22 @@ const ChatRoomScreen =()  => {
     
     const route = useRoute();
 
-    useEffect(() => {
+    const fetchMessages = async () => {
+        const messagesData = await API.graphql(
+            graphqlOperation(
+                messagesByChatRoom, {
+                    chatRoomID: route.params.id,
+                    sortDirection: "DESC",
+                }
+            )
+        )
+        console.log("FETCH MESSAGES");
+        setMessages(messagesData.data.messagesByChatRoom.items);
+    } 
+
+    useEffect(() => {fetchMessages();}, [])
+
+    /*useEffect(() => {
         const fetchMessages = async () => {
             const messagesData = await API.graphql(
                 graphqlOperation(
@@ -37,10 +52,13 @@ const ChatRoomScreen =()  => {
                     }
                 )
             )
+            console.log("FETCH MESSAGES");
             setMessages(messagesData.data.messagesByChatRoom.items);
         } 
         fetchMessages();
-    }, [])
+    }, [])*/
+
+
 
     useEffect(() => {
         const getMyId = async () => {
@@ -49,10 +67,6 @@ const ChatRoomScreen =()  => {
         } 
         getMyId();
     }, [])
-
-    const addMessageToState = async(message) => {
-        setMessages([message, ...messages]);
-    }
 
     useEffect(() => {
         const subscription = API.graphql(
@@ -65,10 +79,11 @@ const ChatRoomScreen =()  => {
                     return;
                 }
 
-                addMessageToState(newMessage);
+                fetchMessages();
 
-                /*console.log(messages.length);
-                setMessages([newMessage, ...messages]);*/
+                //addMessageToState(newMessage);
+
+                //setMessages([newMessage, ...messages]);
             }
         });
 
